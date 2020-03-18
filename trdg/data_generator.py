@@ -1,7 +1,7 @@
 import os
 import random as rnd
 
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageFont
 
 from trdg import computer_text_generator, background_generator, distorsion_generator
 
@@ -216,6 +216,14 @@ class FakeTextDataGenerator(object):
         elif name_format == 2:
             image_name = "{}.{}".format(str(index), extension)
             mask_name = "{}_mask.png".format(str(index))
+        elif name_format == 3:
+            font_family, font_style = ImageFont.truetype(font).getname()
+            font_family = font_family.replace(' ', '_')
+            font_family = font_family.replace(',', '_')
+            font_style = font_style.replace(' ', '_')
+            font_style = font_style.replace(',', '_')
+            image_name = "{}@{}_{}.{}".format(font_family, font_style, str(index), extension)
+            mask_name = "{}@{}_{}_mask.png".format(font_family, font_style, str(index))
         else:
             print("{} is not a valid name format. Using default.".format(name_format))
             image_name = "{}_{}.{}".format(text, str(index), extension)
