@@ -404,7 +404,7 @@ def main():
         pass
     p.terminate()
 
-    if args.name_format == 2:
+    if args.name_format in [2, 3]:
         # Create file with filename-to-label connections
         with open(
             os.path.join(args.output_dir, "labels.txt"), "w", encoding="utf8"
